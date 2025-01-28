@@ -14,8 +14,11 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
 
 
+    @Cacheable("products")
     @Override
     public List<Customer> getCustomers() {
+        System.out.println("Recovering products");
+        emulateLatency();
         return Arrays.asList(
                 Customer.builder().id(1).name("XXXXXXXX").build(),
                 Customer.builder().id(2).name("YYYYYYYY").build(),
@@ -31,5 +34,16 @@ public class CustomerService implements ICustomerService {
                         Address.builder().id(2).name("YYYYYYYY").customerId(1).build(),
                         Address.builder().id(3).name("AAAAAAAA").customerId(2).build())
                 .stream().filter(c -> c.getCustomerId() == id).toList();
+    }
+
+    private void emulateLatency(){
+        try {
+            long time = 2000L;
+            Thread.sleep(time);
+
+        }
+        catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
