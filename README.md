@@ -1,6 +1,9 @@
 # Demo-redis-cache
-Demo-redis-cache
+Implementation example of a spring boot application using cache with redis connection
 
-# Infra
-### JDK 17
+# Requirements
+#### JDK 17
+
+# Installation
+
 
